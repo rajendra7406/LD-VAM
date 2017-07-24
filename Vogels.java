@@ -3,10 +3,10 @@ package vogels;
 import java.util.Arrays;
 
 public class Vogels {
-	//demand[] is store the demands 
+	//demand[] is to store the demands 
 	static int demand[] = {60,40,100,50,90};
 	
-	//supply[] is store the supplies
+	//supply[] is to store the supplies
 	static int supplly[] = {100,80,70,90};
 		
 	//noOfDemands for storing no of demands
@@ -58,42 +58,13 @@ public class Vogels {
 	
 	public static void main(String[] args) {
 
-		       //	ArrayList<Integer> demand = new ArrayList<Integer>();
-		       //	ArrayList<Integer> supply = new ArrayList<Integer>();
-		   
 			Arrays.fill(rowOver, false);
 			Arrays.fill(colOver, false);
 			
-		   System.out.println("Enter the no of demands ");
-		   /*
-		    * Scanner in = new Scanner(System.in);
-		    * int noOfDemands = in.nextInt();
-		    * int demand[] = new int[noOfDemands];
-		    */
-		    System.out.println("Enter the no of supplies ");
-		   /*
-		    * int noOfSupplies = in.nextInt();
-		    * int supply[] = new int[noOfSupplies];
-		    */
-		   
 		   System.out.println("demands = "+noOfDemands);
 		   System.out.println("supplies = "+noOfSupplies);
-		   System.out.println("enter the costs of mathematical matrix");
+		   System.out.println("the costs of mathematical matrix");
 		   
-		   /*
-		    * int mathMatrix[][] = new int[noOfSupplies][noOfDemands];
-		    * int rowPenalty[]=new int[noOfSupplies];
-		    * int colPenalty[]=new int[noOfDemands];
-		   */
-		   
-		   /*
-		    * for(int i=0;i<noOfSupplies;i++){ 
-			  	   for(int j=1;j<noOfDemands;j++) {
-			  	       in = new Scanner(System.in);
-				    	mathMatrix[i][j]=in.nextInt();
-				    }
-			  }	    
-		    */
 	
 		   while (totalSupplly!=0){ 
 		   int rowPosition=0,colPosition=0;
@@ -148,28 +119,23 @@ public class Vogels {
 				   colPosition=i;
 			  }//end of for
 			   
-			  System.out.println("..."+colPosition+"..."+"dfadfsdfsdfsdfsdfsdf"+noOfSupplies);
+			  
 			  boolean dec=true;
 			  while (dec) {
 			  int tempMin=Integer.MAX_VALUE;
 			  	  for(int i=0;i<noOfSupplies;i++){
-			  		  //System.out.println(mathMatrix[i][colPosition]);
-					  if(rowOver[i]){
+			  		  if(rowOver[i]){
 						  continue;
 					  }
 			  		  if(mathMatrix[i][colPosition]<tempMin) {
 						  tempMin=mathMatrix[i][colPosition];
-						  System.out.println("entered"+"i = "+i+"colPos= "+colPosition+"minimum = "+tempMin);
 						  rowPosition=i;
 					  }
 				  }//end of for
 				  cal(rowPosition,colPosition);
 				  rowOver[rowPosition]=true;
 				  
-				  System.out.println("..."+rowPosition+"..."+colPosition+"adfasdf"+totalSupplly);
-				    
 				  tempMin=Integer.MAX_VALUE;
-				  //mathMatrix[rowPosition][colPosition]=Integer.MAX_VALUE;				  
 				  printMatrix();
 				  if(totalSupplly==0) {
 					  dec=false;
@@ -189,7 +155,6 @@ public class Vogels {
 		   		 cal(rowPosition,colPosition);
 		   	}else {
 		   		//finding the least cost in the col
-		   		System.out.println("col index"+maxIndex);
 		   		rowPosition=rowIndexOfMinValueInCol[maxIndex]; colPosition=maxIndex; 
 		   		cal(rowPosition,colPosition);
 		   	} 
@@ -198,26 +163,12 @@ public class Vogels {
 		   	 if(demand[colPosition]==0) {
 		   		colCount--;
 		   		colOver[colPosition]=true;
-		   		/*
-		   		for(int i=0;i<noOfSupplies;i++){
-		   			mathMatrix[i][colPosition]=Integer.MAX_VALUE;
-		   			System.out.println("i ="+i);
-		   		}
-		   		*/
 		   	  }
 		   	if(supplly[rowPosition]==0) {
 		   		rowCount--;
 		   		rowOver[rowPosition]=true;
-		   		
-		   		/*
-		   		for(int i=0;i<noOfDemands;i++){
-		   			mathMatrix[rowPosition][i]=Integer.MAX_VALUE;
-		   		}
-		   		*/ 		
-		   		
-		   	  } // end of if
-		   	System.out.println("rowcount ="+rowCount+"colcount ="+colCount);
-		  
+		   	 } // end of if
+		   			  
 		    if(countDown<0) {
 				   return;
 			   }
@@ -227,11 +178,7 @@ public class Vogels {
 	   
 	   public static int pen(){
 			//calculating penalty in rows
-			/*
-			int colIndexOfMinValueInRow[]=new int[noOfSupplies];
-			int rowIndexOfMinValueInCol[]=new int[noOfDemands];
-			*/      
-		    int minValueInRow[]=new int[noOfSupplies], minValueInCol[]=new int[noOfDemands];
+			int minValueInRow[]=new int[noOfSupplies], minValueInCol[]=new int[noOfDemands];
 		   for(int i=0;i<noOfSupplies;i++){
 			   if(rowOver[i]){
 				   continue;
@@ -240,7 +187,6 @@ public class Vogels {
 			   
 			   for(int j=0;j<noOfDemands;j++) {
 				   if(colOver[j]) {
-					   //System.out.println("col j"+j);
 					   continue;
 				   }
 				 
@@ -251,7 +197,6 @@ public class Vogels {
 							   firstMin=secondMin;
 							   secondMin=temp;
 							   colIndexOfMinValueInRow[i]=j;
-							   //System.out.println("entered");
 						   }//first if 
 					   } //second if    
 	           
@@ -262,21 +207,19 @@ public class Vogels {
 		   
 		   
 		   for (int value : rowPenalty) {
-			   System.out.println("Row Value = " + value);
+			   System.out.println("Value in row penalty = " + value);
 		   } 
 
 		   //  calculating penalty in cols
 		   	for (int i=0;i<noOfDemands;i++){
 		   		if(colOver[i]){
-		   			System.out.println("col over"+ i );
 		   			continue;
 		   		} 
 		   		int firstMin=Integer.MAX_VALUE, secondMin=Integer.MAX_VALUE;
 		   		
 		   			for(int j=0;j<noOfSupplies;j++){
 		   				if(rowOver[j]){
-				   			System.out.println("row over"+ j );
-		   					continue;
+				   			continue;
 		   				}
 		   			if(mathMatrix[j][i]<=secondMin) {
 		   				secondMin=mathMatrix[j][i];
@@ -294,7 +237,7 @@ public class Vogels {
 	   
 		   	
 		   	for ( int value : colPenalty) {
-		   	   System.out.println("Column Value = " + value);
+		   	   System.out.println("Value in column penalty= " + value);
 		   	}   
 		   	
 		   	
@@ -336,7 +279,6 @@ public class Vogels {
 		   				if(minValueInRow[i]<=firstMin) {
 		   					maxIndex=i;
 		   					firstMin=minValueInRow[i];
-		   					System.out.println("maxindex ="+maxIndex);
 		   				}
 		   				
 		   			}//end of if
@@ -366,23 +308,18 @@ public class Vogels {
 	   public static void cal(int rowPosition, int colPosition) {
 		   countDown=countDown-1;
 		   
-		   System.out.println("row index = "+ rowPosition +"positon = ["+ rowPosition + "][" + colPosition+"]"+countDown);
-		   System.out.println("supply = " + supplly[rowPosition] + "demand = "+ demand[colPosition]);
-	   		if(supplly[rowPosition]<demand[colPosition]){
+		  	if(supplly[rowPosition]<demand[colPosition]){
 	   			demand[colPosition]=demand[colPosition]-supplly[rowPosition];
 	   			totalCost = mathMatrix[rowPosition][colPosition]*supplly[rowPosition] + totalCost;
 	   			totalSupplly = totalSupplly - supplly[rowPosition];
 	   			supplly[rowPosition]=0;
-	   			System.out.println("supply = " + supplly[rowPosition] + "demand = "+ demand[colPosition]);
 	   		} else {
 	   			supplly[rowPosition]=supplly[rowPosition]-demand[colPosition];
 	   			totalCost = mathMatrix[rowPosition][colPosition] * demand[colPosition] + totalCost;
 	   			totalSupplly = totalSupplly - demand[colPosition];
 	   			demand[colPosition]=0;
-	   			System.out.println("supply = " + supplly[rowPosition] + "demand = "+ demand[colPosition]);
 	   		}
 	   		System.out.println("total cost = "+totalCost );
-	   		//mathMatrix[rowPosition][colPosition]= Integer.MAX_VALUE;
 	   }   
 	   public static void printMatrix(){
 		   for(int i=0;i<noOfSupplies;i++) {
